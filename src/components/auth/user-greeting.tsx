@@ -1,9 +1,11 @@
+import { connection } from "next/server";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/lib/auth/actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 // Membaca cookie sesi saat request, jadi harus dibungkus <Suspense> oleh pemakainya.
 export async function UserGreeting() {
+  await connection();
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
